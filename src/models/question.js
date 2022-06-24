@@ -11,6 +11,7 @@ module.exports = sequelize.define(
     },
     question: DataTypes.STRING,
     isPublic: DataTypes.BOOLEAN,
+    userId: DataTypes.INTEGER,
     createdAt: DataTypes.DATE,
     updatedAt: DataTypes.DATE,
   },

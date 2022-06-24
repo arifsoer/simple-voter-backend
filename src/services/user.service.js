@@ -19,4 +19,12 @@ const getAll = async () => {
   }
 };
 
-module.exports = { create, getAll };
+const getOne = async (whereClause) => {
+  try {
+    return await User.findOne({where: whereClause});
+  } catch (error) {
+    throw new ServerError("Fetch Data failed");
+  }
+}
+
+module.exports = { create, getAll, getOne };
