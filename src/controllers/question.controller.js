@@ -26,6 +26,7 @@ const create = async (req, res) => {
   } catch (error) {
     console.log(error)
     res.status(error.status).json({
+      status: error.status,
       message: error.message
     })
   }
@@ -35,11 +36,14 @@ const getAll = async (req, res) => {
   try {
     const allData = await QuestionService.getAll()
     res.status(200).json({
-      message: allData
+      status: 200,
+      message: 'success',
+      data: allData
     })
   } catch (error) {
     console.log(error)
     res.status(error.status).json({
+      status: error.status,
       message: error.message
     })
   }

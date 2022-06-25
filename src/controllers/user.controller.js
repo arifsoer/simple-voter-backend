@@ -17,6 +17,7 @@ const register = async (req, res) => {
     isNullOrEmptyString(password)
   ) {
     res.status(400).json({
+      status: 400,
       message: "Bad input parameter",
     });
     return;
@@ -33,11 +34,13 @@ const register = async (req, res) => {
     };
     const userDb = await UserService.create(newUser);
     res.status(200).json({
+      status: 200,
       message: "success",
       data: userDb,
     });
   } catch (error) {
     res.status(error.status).json({
+      statusbar: error.status,
       message: error.message,
     });
   }
@@ -48,6 +51,7 @@ const login = async (req, res) => {
 
   if (isNullOrEmptyString(email) || isNullOrEmptyString(password)) {
     res.status(400).json({
+      status: 400,
       message: "Login Failed",
     });
     return;
@@ -65,6 +69,7 @@ const login = async (req, res) => {
         secretKey
       );
       res.status(200).json({
+        status: 200,
         message: "sucsess",
         data: {
           token
@@ -72,12 +77,14 @@ const login = async (req, res) => {
       });
     } else {
       res.status(500).json({
+        status: 500,
         message: "Login Failed",
       });
     }
   } catch (error) {
     console.log(error);
     res.status(500).json({
+      status: 500,
       message: "Login Failed",
     });
   }
