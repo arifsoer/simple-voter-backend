@@ -1,9 +1,9 @@
-const { UserService } = require("../services");
+const UserService = require("./user.service");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
-const { isNullOrEmptyString } = require("../utils/helper");
-const { secretKey } = require("../utils/envConfig");
+const { isNullOrEmptyString } = require("../../utils/helper");
+const { secretKey } = require("../../utils/envConfig");
 
 const saltRound = 16;
 

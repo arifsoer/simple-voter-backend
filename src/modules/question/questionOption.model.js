@@ -1,21 +1,21 @@
-const sequelize = require("../config/sequelize");
+const sequelize = require("../../config/sequelize");
 const { DataTypes } = require("sequelize");
 
 module.exports = sequelize.define(
-  "User",
+  "QuestionOption",
   {
     id: {
       type: DataTypes.INTEGER,
-      autoIncrement: true,
       primaryKey: true,
+      autoIncrement: true,
+      allowNull: false,
     },
-    fullName: DataTypes.STRING,
-    email: DataTypes.STRING,
-    password: DataTypes.STRING,
+    questionId: DataTypes.INTEGER,
+    name: DataTypes.STRING,
     createdAt: DataTypes.DATE,
     updatedAt: DataTypes.DATE,
   },
   {
-    tableName: "Users",
+    tableName: "QuestionOptions",
   }
 );

@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon src/app.js",
-    "model:generate": "npx sequelize-cli model:generate",
+    "migration:generate": "npx sequelize-cli migration:generate",
     "migrate:run": "npx sequelize-cli db:migrate"
   },
   "author": "redbios",

@@ -1,5 +1,5 @@
-const { QuestionService } = require("../services");
-const { isNullOrEmptyString } = require("../utils/helper");
+const QuestionService = require("./question.service");
+const { isNullOrEmptyString } = require("../../utils/helper");
 
 const create = async (req, res) => {
   const { question, isPublic } = req.body;
@@ -40,6 +40,18 @@ const getAll = async (req, res) => {
       message: 'success',
       data: allData
     })
+  } catch (error) {
+    console.log(error)
+    res.status(error.status).json({
+      status: error.status,
+      message: error.message
+    })
+  }
+}
+
+const createOption = async (req, res) => {
+  try {
+    
   } catch (error) {
     console.log(error)
     res.status(error.status).json({

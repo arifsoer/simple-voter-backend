@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-const { UserService } = require("../services");
+const UserService = require("../modules/user/user.service");
 const { secretKey } = require("../utils/envConfig");
 const { ServerError } = require("../utils/error");
 

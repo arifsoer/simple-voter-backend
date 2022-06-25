@@ -1,6 +1,6 @@
-const { User } = require("../models");
+const User = require("./user.model");
 
-const { ServerError } = require("../utils/error");
+const { ServerError } = require("../../utils/error");
 
 const create = async (newUser) => {
   try {
