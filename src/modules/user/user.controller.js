@@ -4,23 +4,23 @@ const jwt = require("jsonwebtoken");
 
 const { isNullOrEmptyString } = require("../../utils/helper");
 const { secretKey } = require("../../utils/envConfig");
+const {
+  ValidationError,
+  AuthError,
+  DatabaseError,
+} = require("../../utils/error");
 
 const saltRound = 16;
 
 // Register user
-const register = async (req, res) => {
+const register = async (req, res, next) => {
   const { fullName, email, password } = req.body;
-  console.log(fullName);
   if (
     isNullOrEmptyString(fullName) ||
     isNullOrEmptyString(email) ||
     isNullOrEmptyString(password)
   ) {
-    res.status(400).json({
-      status: 400,
-      message: "Bad input parameter",
-    });
-    return;
+    throw new ValidationError("Please check your fullname, email or password");
   }
 
   try {
@@ -39,22 +39,15 @@ const register = async (req, res) => {
       data: userDb,
     });
   } catch (error) {
-    res.status(error.status).json({
-      statusbar: error.status,
-      message: error.message,
-    });
+    next(error);
   }
 };
 
-const login = async (req, res) => {
+const login = async (req, res, next) => {
   const { email, password } = req.body;
 
   if (isNullOrEmptyString(email) || isNullOrEmptyString(password)) {
-    res.status(400).json({
-      status: 400,
-      message: "Login Failed",
-    });
-    return;
+    throw new ValidationError("Please check your email or password");
   }
 
   try {
@@ -72,21 +65,14 @@ const login = async (req, res) => {
         status: 200,
         message: "sucsess",
         data: {
-          token
-        }
+          token,
+        },
       });
     } else {
-      res.status(500).json({
-        status: 500,
-        message: "Login Failed",
-      });
+      throw new AuthError();
     }
   } catch (error) {
-    console.log(error);
-    res.status(500).json({
-      status: 500,
-      message: "Login Failed",
-    });
+    next(error);
   }
 };
 

@@ -1,14 +1,12 @@
 const QuestionService = require("./question.service");
 const { isNullOrEmptyString } = require("../../utils/helper");
+const { ValidationError } = require("../../utils/error");
 
-const create = async (req, res) => {
+const create = async (req, res, next) => {
   const { question, isPublic } = req.body;
 
   if (isNullOrEmptyString(question) || isNullOrEmptyString(isPublic)) {
-    res.status(400).json({
-      message: "Bad Body Data input",
-    });
-    return;
+    throw new ValidationError('Check your question and isPublic')
   }
 
   try {
@@ -24,15 +22,11 @@ const create = async (req, res) => {
       data: newQuestion,
     });
   } catch (error) {
-    console.log(error)
-    res.status(error.status).json({
-      status: error.status,
-      message: error.message
-    })
+    next(error)
   }
 };
 
-const getAll = async (req, res) => {
+const getAll = async (req, res, next) => {
   try {
     const allData = await QuestionService.getAll()
     res.status(200).json({
@@ -41,23 +35,15 @@ const getAll = async (req, res) => {
       data: allData
     })
   } catch (error) {
-    console.log(error)
-    res.status(error.status).json({
-      status: error.status,
-      message: error.message
-    })
+    next(error)
   }
 }
 
-const createOption = async (req, res) => {
+const createOption = async (req, res, next) => {
   try {
     
   } catch (error) {
-    console.log(error)
-    res.status(error.status).json({
-      status: error.status,
-      message: error.message
-    })
+    next(error)
   }
 }
 

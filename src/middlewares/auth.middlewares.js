@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken");
 const UserService = require("../modules/user/user.service");
 const { secretKey } = require("../utils/envConfig");
-const { ServerError } = require("../utils/error");
+const { AuthError } = require("../utils/error");
 
 const auth = async (req, res, next) => {
   const authHeader = req.header("Authorization");
@@ -12,10 +12,7 @@ const auth = async (req, res, next) => {
     req.user = user;
     next();
   } catch (error) {
-    console.log(error);
-    res.status(401).json({
-      message: "Not Authenticated",
-    });
+    throw AuthError();
   }
 };
 
@@ -32,7 +29,7 @@ const authOptional = async (req, res, next) => {
       next();
     }
   } catch (error) {
-    console.log(error);
+    console.error(error);
     next();
   }
 };

@@ -1,18 +1,29 @@
-const express = require('express')
-const cors = require('cors')
-const morgan = require('morgan')
+const express = require("express");
+const cors = require("cors");
+const morgan = require("morgan");
 
-const globalRouter = require('./router')
+const { errorHandler, errorLog } = require("./middlewares/error.middleware");
+const { ForbiddenError } = require("./utils/error");
 
-const app = express()
-const port = 3000
+const globalRouter = require("./router");
 
-app.use(express.json())
-app.use(cors())
-app.use(morgan('dev'))
+
+const app = express();
+const port = 3000;
+
+app.use(express.json());
+app.use(cors());
+app.use(morgan("dev"));
 
 app.use("/api/v1", globalRouter);
 
+app.use("*", (_, _1) => {
+  throw new ForbiddenError()
+});
+
+app.use(errorLog);
+app.use(errorHandler);
+
 app.listen(port, () => {
-  console.log('server ready get request')
+  console.log("server ready get request");
 });
