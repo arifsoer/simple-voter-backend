@@ -3,16 +3,17 @@ const UserService = require("../modules/user/user.service");
 const { secretKey } = require("../utils/envConfig");
 const { AuthError } = require("../utils/error");
 
-const auth = async (req, res, next) => {
-  const authHeader = req.header("Authorization");
+const auth = async (req, _, next) => {
   try {
+    const authHeader = req.header("Authorization");
     const token = authHeader.split(" ")[1];
     const decoded = jwt.verify(token, secretKey);
     const user = await UserService.getOne({ id: decoded.data });
     req.user = user;
     next();
   } catch (error) {
-    throw AuthError();
+    console.log(error)
+    next(new AuthError());
   }
 };
 

@@ -22,7 +22,8 @@ const model = sequelize.define(
 );
 
 model.hasMany(QuestionOption, {
-  as: 'options'
+  as: 'options',
+  foreignKey: 'questionId'
 })
 
 module.exports = model

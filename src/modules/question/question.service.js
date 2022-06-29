@@ -58,7 +58,7 @@ const getOptionByQuestion = async (questionId) => {
 
 const deleteOption = async (id) => {
   try {
-    return await QuestionOption.destroy({ where: { id } });
+    return await QuestionOption.destroy({ where: { id }, logging: console.log });
   } catch (error) {
     console.log(error);
     throw new DatabaseError("Failed Delete Data");

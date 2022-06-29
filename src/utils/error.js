@@ -8,11 +8,11 @@ class DatabaseError extends Error {
 }
 
 class ValidationError extends Error {
-  constructor(additionalMessage) {
+  constructor(arrayMessages) {
     super();
 
     this.statusCode = 400;
-    this.message = `Validation Fail in your body request with : ${additionalMessage}`;
+    this.message = arrayMessages;
   }
 }
 
@@ -21,7 +21,7 @@ class AuthError extends Error {
     super();
 
     this.statusCode = 401;
-    this.message = `Authorization Failed`;
+    this.message = "Authorization Failed";
   }
 }
 
