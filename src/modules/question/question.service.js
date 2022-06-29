@@ -1,5 +1,5 @@
-const Question = require("./question.model");
-const QuestionOption = require("./questionOption.model");
+const Question = require("./question.model").default;
+const QuestionOption = require("./questionOption.model").default;
 const { DatabaseError } = require("../../utils/error");
 
 const create = async (newQuestion) => {

@@ -1,6 +1,6 @@
 const QuestionService = require("./question.service");
 const { isNullOrEmptyString } = require("../../utils/helper");
-const { requiredValidator } = require("../../utils/validator");
+const { requiredValidator } = require("../../utils/validator").default;
 const { ValidationError } = require("../../utils/error");
 
 const create = async (req, res, next) => {

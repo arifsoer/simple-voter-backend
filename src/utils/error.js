@@ -34,4 +34,4 @@ class ForbiddenError extends Error {
   }
 }
 
-module.exports = { DatabaseError, ValidationError, AuthError, ForbiddenError };
+export default { DatabaseError, ValidationError, AuthError, ForbiddenError };

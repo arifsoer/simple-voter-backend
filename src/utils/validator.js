@@ -30,4 +30,4 @@ const requiredValidator = (body) => {
   };
 };
 
-module.exports = { requiredValidator };
+export default { requiredValidator };

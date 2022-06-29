@@ -1,7 +1,7 @@
-const sequelize = require("../../config/sequelize");
-const { DataTypes } = require("sequelize");
+import { define } from "../../config/sequelize";
+import { DataTypes } from "sequelize";
 
-module.exports = sequelize.define(
+export default define(
   "QuestionOption",
   {
     id: {

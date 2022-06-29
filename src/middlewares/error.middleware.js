@@ -23,4 +23,4 @@ const failSafeHandler = (error, _, res, _1) => {
   });
 };
 
-module.exports = { errorHandler, errorLog, failSafeHandler };
+export default { errorHandler, errorLog, failSafeHandler };

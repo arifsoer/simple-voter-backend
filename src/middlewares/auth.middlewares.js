@@ -1,14 +1,14 @@
-const jwt = require("jsonwebtoken");
-const UserService = require("../modules/user/user.service");
-const { secretKey } = require("../utils/envConfig");
-const { AuthError } = require("../utils/error");
+import { verify } from "jsonwebtoken";
+import { getOne } from "../modules/user/user.service";
+import { secretKey } from "../utils/envConfig";
+import { AuthError } from "../utils/error";
 
 const auth = async (req, _, next) => {
   try {
     const authHeader = req.header("Authorization");
     const token = authHeader.split(" ")[1];
-    const decoded = jwt.verify(token, secretKey);
-    const user = await UserService.getOne({ id: decoded.data });
+    const decoded = verify(token, secretKey);
+    const user = await getOne({ id: decoded.data });
     req.user = user;
     next();
   } catch (error) {
@@ -21,9 +21,9 @@ const authOptional = async (req, res, next) => {
   const authHeader = req.header("Authorization");
   try {
     const token = authHeader.split(" ")[1];
-    const decoded = jwt.verify(token, secretKey);
+    const decoded = verify(token, secretKey);
     if (decoded) {
-      const user = await UserService.getOne({ id: decoded.data });
+      const user = await getOne({ id: decoded.data });
       req.user = user;
       next();
     } else {
@@ -35,4 +35,4 @@ const authOptional = async (req, res, next) => {
   }
 };
 
-module.exports = { auth, authOptional };
+export default { auth, authOptional };

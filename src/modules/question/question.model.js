@@ -1,8 +1,8 @@
-const sequelize = require("../../config/sequelize");
-const { DataTypes } = require("sequelize");
-const QuestionOption = require('./questionOption.model')
+import { define } from "../../config/sequelize";
+import { DataTypes } from "sequelize";
+import QuestionOption from './questionOption.model';
 
-const model = sequelize.define(
+const model = define(
   "Question",
   {
     id: {
@@ -26,4 +26,4 @@ model.hasMany(QuestionOption, {
   foreignKey: 'questionId'
 })
 
-module.exports = model
+export default model
