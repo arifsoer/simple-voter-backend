@@ -1,7 +1,7 @@
-const sequelize = require("../../config/sequelize");
-const { DataTypes } = require("sequelize");
+import sequelize from "../../config/sequelize.js";
+import { DataTypes } from "sequelize";
 
-module.exports = sequelize.define(
+export default sequelize.define(
   "User",
   {
     id: {
@@ -17,5 +17,8 @@ module.exports = sequelize.define(
   },
   {
     tableName: "Users",
+    defaultScope: {
+      attributes: { exclude: ["password"] },
+    },
   }
 );

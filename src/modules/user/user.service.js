@@ -1,6 +1,6 @@
-const User = require("./user.model");
+import User from "./user.model.js";
 
-const { DatabaseError } = require("../../utils/error");
+import { DatabaseError } from "../../utils/error.js";
 
 const create = async (newUser) => {
   try {
@@ -26,4 +26,4 @@ const getOne = async (whereClause) => {
   }
 }
 
-module.exports = { create, getAll, getOne };
+export { create, getAll, getOne };

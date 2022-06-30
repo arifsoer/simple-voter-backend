@@ -1,20 +1,16 @@
-const express = require("express");
-const cors = require("cors");
-const morgan = require("morgan");
+import express, { json } from "express";
+import cors from "cors";
+import morgan from "morgan";
 
-const {
-  errorHandler,
-  errorLog,
-  failSafeHandler,
-} = require("./middlewares/error.middleware");
-const { ForbiddenError } = require("./utils/error");
+import { errorHandler, errorLog, failSafeHandler } from "./middlewares/error.middleware.js";
+import { ForbiddenError } from "./utils/error.js";
 
-const globalRouter = require("./router");
+import globalRouter from "./router.js";
 
 const app = express();
 const port = 3000;
 
-app.use(express.json());
+app.use(json());
 app.use(cors());
 app.use(morgan("dev"));
 

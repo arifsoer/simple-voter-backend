@@ -1,8 +1,8 @@
-const {Sequelize} = require('sequelize')
-const envConfig = require('../utils/envConfig')
+import { Sequelize } from "sequelize";
+import { nodeEnv } from "../utils/envConfig.js";
 
-const config = require('./config')
+import config from "./config.js";
 
-const dbOption = config[envConfig.nodeEnv ?? 'development']
+const dbOption = config[nodeEnv ?? "development"];
 
-module.exports = new Sequelize(dbOption)
+export default new Sequelize(dbOption);

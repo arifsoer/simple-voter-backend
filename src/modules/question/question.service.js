@@ -1,6 +1,6 @@
-const Question = require("./question.model").default;
-const QuestionOption = require("./questionOption.model").default;
-const { DatabaseError } = require("../../utils/error");
+import Question from "./question.model.js";
+import QuestionOption from "./questionOption.model.js";
+import { DatabaseError } from "../../utils/error.js";
 
 const create = async (newQuestion) => {
   try {
@@ -65,7 +65,7 @@ const deleteOption = async (id) => {
   }
 };
 
-module.exports = {
+export {
   create,
   getAll,
   getOne,

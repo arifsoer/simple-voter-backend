@@ -1,12 +1,12 @@
-const envConfig = require('../utils/envConfig')
+import { pgHost, pgPort, pgUsername, pgPassword, pgDbName } from '../utils/envConfig.js';
 
 const development = {
-  host: envConfig.pgHost ?? "localhost",
-  port: envConfig.pgPort ?? 5432,
-  username: envConfig.pgUsername ?? "username",
-  password: envConfig.pgPassword ?? "password",
-  database: envConfig.pgDbName ?? "database",
+  host: pgHost ?? "localhost",
+  port: pgPort ?? 5432,
+  username: pgUsername ?? "username",
+  password: pgPassword ?? "password",
+  database: pgDbName ?? "database",
   dialect: "postgres",
 };
 
-module.exports = {development}
+export default {development}

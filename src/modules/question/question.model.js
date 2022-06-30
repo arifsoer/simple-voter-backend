@@ -1,8 +1,8 @@
-import { define } from "../../config/sequelize";
+import sequelize from "../../config/sequelize.js";
 import { DataTypes } from "sequelize";
-import QuestionOption from './questionOption.model';
+import QuestionOption from './questionOption.model.js';
 
-const model = define(
+const model = sequelize.define(
   "Question",
   {
     id: {

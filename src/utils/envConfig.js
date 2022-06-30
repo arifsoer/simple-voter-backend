@@ -1,13 +1,9 @@
-require('dotenv').config()
+import 'dotenv/config'
 
-module.exports = {
-  nodeEnv: process.env.NODE_ENV,
-
-  pgUsername: process.env.PG_USERNAME,
-  pgPassword: process.env.PG_PASSWORD,
-  pgHost: process.env.PG_HOST,
-  pgPort: process.env.PG_PORT,
-  pgDbName: process.env.PG_DB_NAME,
-
-  secretKey: process.env.SECRET_KEY
-}
+export const nodeEnv = process.env.NODE_ENV
+export const pgUsername = process.env.PG_USERNAME
+export const pgPassword = process.env.PG_PASSWORD
+export const pgHost = process.env.PG_HOST
+export const pgPort = process.env.PG_PORT
+export const pgDbName = process.env.PG_DB_NAME
+export const secretKey = process.env.SECRET_KEY

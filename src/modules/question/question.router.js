@@ -1,6 +1,8 @@
-const router = require("express").Router();
-import { create, getAll, createOption, getOptions, deleteOption } from "./question.controller";
-import { auth, authOptional } from "../../middlewares/auth.middlewares";
+import { Router } from "express"
+import { create, getAll, createOption, getOptions, deleteOption } from "./question.controller.js";
+import { auth, authOptional } from "../../middlewares/auth.middlewares.js";
+
+const router = Router()
 
 router.post("/", auth, create);
 router.get("/", auth, getAll);

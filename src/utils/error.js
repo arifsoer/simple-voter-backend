@@ -34,4 +34,4 @@ class ForbiddenError extends Error {
   }
 }
 
-export default { DatabaseError, ValidationError, AuthError, ForbiddenError };
+export { DatabaseError, ValidationError, AuthError, ForbiddenError };

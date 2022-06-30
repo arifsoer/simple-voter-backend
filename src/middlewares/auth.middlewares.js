@@ -1,7 +1,8 @@
-import { verify } from "jsonwebtoken";
-import { getOne } from "../modules/user/user.service";
-import { secretKey } from "../utils/envConfig";
-import { AuthError } from "../utils/error";
+import jwt from "jsonwebtoken"
+const {verify} = jwt
+import { getOne } from "../modules/user/user.service.js";
+import { secretKey } from "../utils/envConfig.js";
+import { AuthError } from "../utils/error.js";
 
 const auth = async (req, _, next) => {
   try {
@@ -35,4 +36,4 @@ const authOptional = async (req, res, next) => {
   }
 };
 
-export default { auth, authOptional };
+export { auth, authOptional };

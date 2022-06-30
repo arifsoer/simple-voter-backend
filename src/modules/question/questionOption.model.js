@@ -1,7 +1,7 @@
-import { define } from "../../config/sequelize";
+import sequelize from "../../config/sequelize.js";
 import { DataTypes } from "sequelize";
 
-export default define(
+export default sequelize.define(
   "QuestionOption",
   {
     id: {

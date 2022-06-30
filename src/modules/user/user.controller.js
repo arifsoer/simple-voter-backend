@@ -1,14 +1,10 @@
-const UserService = require("./user.service");
-const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
+import {create, getOne} from "./user.service.js";
+import { hash, compare } from "bcrypt";
+import jwt from "jsonwebtoken";
 
-const { isNullOrEmptyString } = require("../../utils/helper");
-const { secretKey } = require("../../utils/envConfig");
-const {
-  ValidationError,
-  AuthError,
-  DatabaseError,
-} = require("../../utils/error");
+import { isNullOrEmptyString } from "../../utils/helper.js";
+import { secretKey } from "../../utils/envConfig.js";
+import { ValidationError, AuthError, DatabaseError } from "../../utils/error.js";
 
 const saltRound = 16;
 
@@ -25,14 +21,14 @@ const register = async (req, res, next) => {
 
   try {
     // generate hash password
-    const passwordHashed = await bcrypt.hash(password, saltRound);
+    const passwordHashed = await hash(password, saltRound);
 
     const newUser = {
       fullName: fullName,
       password: passwordHashed,
       email,
     };
-    const userDb = await UserService.create(newUser);
+    const userDb = await create(newUser);
     res.status(200).json({
       status: 200,
       message: "success",
@@ -51,8 +47,8 @@ const login = async (req, res, next) => {
   }
 
   try {
-    const user = await UserService.getOne({ email });
-    const isPasswordMatch = await bcrypt.compare(password, user.password);
+    const user = await getOne({ email });
+    const isPasswordMatch = await compare(password, user.password);
     if (isPasswordMatch) {
       const token = jwt.sign(
         {
@@ -76,4 +72,19 @@ const login = async (req, res, next) => {
   }
 };
 
-module.exports = { register, login };
+const getMe = async (req, res, next) => {
+  try {
+    const user = await getOne({id: req.user.id})
+    res.status(200).json({
+      status: 200,
+      message: "success",
+      data: {
+        user
+      }
+    })
+  } catch (error) {
+    next(error)
+  }
+}
+
+export { register, login, getMe };

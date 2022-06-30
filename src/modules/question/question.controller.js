@@ -1,7 +1,13 @@
-const QuestionService = require("./question.service");
-const { isNullOrEmptyString } = require("../../utils/helper");
-const { requiredValidator } = require("../../utils/validator").default;
-const { ValidationError } = require("../../utils/error");
+import {
+  create as _create,
+  getAll as _getAll,
+  createOption as _createOption,
+  getOptionByQuestion,
+  deleteOption as _deleteOption,
+} from "./question.service.js";
+import { isNullOrEmptyString } from "../../utils/helper.js";
+import requiredValidator from "../../utils/validator.js";
+import { ValidationError } from "../../utils/error.js";
 
 const create = async (req, res, next) => {
   const { question, isPublic } = req.body;
@@ -16,7 +22,7 @@ const create = async (req, res, next) => {
       isPublic,
       userId: req.user.id,
     };
-    const newQuestion = await QuestionService.create(payload);
+    const newQuestion = await _create(payload);
 
     res.status(200).json({
       message: "success",
@@ -27,9 +33,9 @@ const create = async (req, res, next) => {
   }
 };
 
-const getAll = async (req, res, next) => {
+const getAll = async (_, res, next) => {
   try {
-    const allData = await QuestionService.getAll();
+    const allData = await _getAll();
     res.status(200).json({
       status: 200,
       message: "success",
@@ -53,7 +59,7 @@ const createOption = async (req, res, next) => {
       questionId: id,
       name: req.body.name,
     };
-    const data = await QuestionService.createOption(payload);
+    const data = await _createOption(payload);
     res.status(200).json({
       status: 200,
       message: "success",
@@ -67,7 +73,7 @@ const createOption = async (req, res, next) => {
 const getOptions = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const data = await QuestionService.getOptionByQuestion(id);
+    const data = await getOptionByQuestion(id);
     res.status(200).json({
       status: 200,
       message: "success",
@@ -81,7 +87,7 @@ const getOptions = async (req, res, next) => {
 const deleteOption = async (req, res, next) => {
   try {
     const { id } = req.params;
-    await QuestionService.deleteOption(id);
+    await _deleteOption(id);
     res.status(200).json({
       status: 200,
       message: "success",
@@ -91,4 +97,4 @@ const deleteOption = async (req, res, next) => {
   }
 };
 
-module.exports = { create, getAll, createOption, getOptions, deleteOption };
+export { create, getAll, createOption, getOptions, deleteOption };

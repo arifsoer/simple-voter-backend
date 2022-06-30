@@ -23,4 +23,4 @@ const failSafeHandler = (error, _, res, _1) => {
   });
 };
 
-export default { errorHandler, errorLog, failSafeHandler };
+export { errorHandler, errorLog, failSafeHandler };
